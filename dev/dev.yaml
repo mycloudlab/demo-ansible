@@ -1,6 +1,5 @@
-# Basic provisioning example
 - name: Ansible test
-  hosts: all
+  hosts: localhost
   tasks:
   - name: criar vpc para aplicação pet-clinic
     amazon.aws.ec2_vpc_net:
@@ -126,3 +125,25 @@
         Name: pet-clinic-db-dev
         role: database
         env: dev
+
+
+
+
+
+- name: ansible haproxy balancer
+  hosts: tag_Name_pet_clinic_lb_dev
+  tasks:
+  - name: configura balanceamento
+    shell: touch /tmp/lb
+
+- name: ansible db
+  hosts: tag_Name_pet_clinic_db_dev
+  tasks:
+  - name: configura db
+    shell: touch /tmp/db
+
+- name: ansible app
+  hosts: tag_Name_pet_clinic_app_dev
+  tasks:
+  - name: configura app
+    shell: touch /tmp/app
