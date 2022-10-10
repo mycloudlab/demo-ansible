@@ -93,6 +93,54 @@
       image_id: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
+      security_group: sec_group_petclinic
+      exact_count: 1
+      vpc_subnet_id: "{{ subnetdata.subnet.id }}"
+      tags:
+        Name: pet-clinic-lb-dev
+        role: balancer
+        env: dev
+
+
+  - name: criar vms para app
+    amazon.aws.ec2_instance:
+      key_name: pet_clinic_key
+      instance_type: t2.micro
+      image_id: ami-0abcb3d13703a4978
+      region: us-east-2
+      wait: yes
+      security_group: sec_group_petclinic
+      exact_count: 2
+      vpc_subnet_id: "{{ subnetdata.subnet.id }}"
+      tags:
+        Name: pet-clinic-app-dev
+        role: app
+        env: dev
+
+  - name: criar vms para db
+    amazon.aws.ec2_instance:
+      key_name: pet_clinic_key
+      instance_type: t2.micro
+      image_id: ami-0abcb3d13703a4978
+      region: us-east-2
+      wait: yes
+      security_group: sec_group_petclinic
+      exact_count: 1
+      vpc_subnet_id: "{{ subnetdata.subnet.id }}"
+      tags:
+        Name: pet-clinic-db-dev
+        role: database
+        env: dev
+
+
+
+  - name: aguarda criar vms para balanceamento
+    amazon.aws.ec2_instance:
+      key_name: pet_clinic_key
+      instance_type: t2.micro
+      image_id: ami-0abcb3d13703a4978
+      region: us-east-2
+      wait: yes
       state: started
       security_group: sec_group_petclinic
       exact_count: 1
@@ -101,10 +149,9 @@
         Name: pet-clinic-lb-dev
         role: balancer
         env: dev
-    register: ec2lb
 
 
-  - name: criar vms para app
+  - name: aguarda criar vms para app
     amazon.aws.ec2_instance:
       key_name: pet_clinic_key
       instance_type: t2.micro
@@ -119,9 +166,8 @@
         Name: pet-clinic-app-dev
         role: app
         env: dev
-    register: ec2app
 
-  - name: criar vms para db
+  - name: aguarda criar vms para db
     amazon.aws.ec2_instance:
       key_name: pet_clinic_key
       instance_type: t2.micro
@@ -136,40 +182,3 @@
         Name: pet-clinic-db-dev
         role: database
         env: dev
-    register: ec2db
-
-
-- name: refresh inventory
-  hosts: localhost
-  connection: local
-  gather_facts: False
-  tasks:
-    - name: Refresh in-memory EC2 cache
-      meta: refresh_inventory
-
-- name: ansible haproxy balancer
-  hosts: tag_Name_pet_clinic_lb_dev
-  remote_user: ec2-user
-  vars:
-    ansible_ssh_private_key_file: "{{playbook_dir}}/pet-clinic-dev"
-  tasks:
-  - name: configura balanceamento
-    shell: touch /tmp/lb
-
-- name: ansible db
-  hosts: tag_Name_pet_clinic_db_dev
-  remote_user: ec2-user
-  vars:
-    ansible_ssh_private_key_file: "{{playbook_dir}}/pet-clinic-dev"
-  tasks:
-  - name: configura db
-    shell: touch /tmp/db
-
-- name: ansible app
-  hosts: tag_Name_pet_clinic_app_dev
-  remote_user: ec2-user
-  vars:
-    ansible_ssh_private_key_file: "{{playbook_dir}}/pet-clinic-dev"
-  tasks:
-  - name: configura app
-    shell: touch /tmp/app
