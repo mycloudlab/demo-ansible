@@ -2,19 +2,16 @@
 - name: Ansible test
   hosts: all
   tasks:
-  - name: debug
-    debug:
-      msg: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
- # - name: launching AWS instance using Ansible
- #   ec2:
- #     key_name: aws_instance_Ansible
- #     instance_type: t2.micro
- #     image: ami-0dacb0c129b49f529
- #     region: us-east-2
- #     wait: yes
- #     group: Ansible
- #     count: 1
- #     vpc_subnet_id: default
- #     assign_public_ip: yes
- #     aws_access_key: 
- #     Aws_secret_key: 
+  - name: launching AWS instance using Ansible
+    ec2:
+      key_name: aws_instance_Ansible
+      instance_type: t2.micro
+      image: ami-0dacb0c129b49f529
+      region: us-east-2
+      wait: yes
+      group: Ansible
+      count: 1
+      vpc_subnet_id: default
+      assign_public_ip: yes
+      aws_access_key: {{ lookup('env', 'AWS_ACCESS_KEY_ID') }}
+      Aws_secret_key: {{ lookup('env', 'AWS_SECRET_KEY_ID') }}
