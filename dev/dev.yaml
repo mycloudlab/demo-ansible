@@ -1,5 +1,6 @@
 - name: Ansible test
   hosts: localhost
+  connection: local 
   tasks:
   - name: criar vpc para aplicação pet-clinic
     amazon.aws.ec2_vpc_net:
