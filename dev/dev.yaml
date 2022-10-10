@@ -3,7 +3,7 @@
   hosts: all
   tasks:
   - name: criar vpc para aplicação pet-clinic
-    ec2_vpc_net:
+    amazon.aws.ec2_vpc_net:
       name: vpc-petclinic-dev
       cidr_block: 10.10.0.0/16
       region: us-east-2
@@ -14,7 +14,7 @@
 
 
   - name: cria o gateway de internet para aplicação pet-clinic
-    ec2_vpc_igw:
+    amazon.aws.ec2_vpc_igw:
       vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
       state: present
@@ -26,7 +26,7 @@
 
 
   - name: cria a sub rede para aplicação pet-clinic
-    ec2_vpc_subnet:
+    amazon.aws.ec2_vpc_subnet:
       state: present
       vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
@@ -39,7 +39,7 @@
 
 
   - name: cria vpc public subnet route table
-    ec2_vpc_route_table:
+    amazon.aws.ec2_vpc_route_table:
       vpc_id: "{{ vpcdata.vpc.id }}"
       region: us-east-2
       state: present
@@ -53,7 +53,7 @@
     register: prtdata
 
   - name: ec2 security group
-    ec2_group:
+    amazon.aws.ec2_group:
       name: sec_group_petclinic
       description: an example EC2 group
       vpc_id: "{{vpcdata.vpc.id}}"
@@ -73,13 +73,13 @@
           cidr_ip: 0.0.0.0/0
 
   - name: create a new ec2 key pair, returns generated private key
-    ec2_key:
+    amazon.aws.ec2_key:
       name: pet_clinic_key
       region: us-east-2
       key_material: "{{ lookup('file', 'pet-clinic-dev.pub') }}"
     
   - name: launching AWS instance using Ansible
-    ec2:
+    amazon.aws.ec2_instance:
       key_name: pet_clinic_key
       instance_type: t2.micro
       image: ami-0abcb3d13703a4978
