@@ -2,16 +2,29 @@
 - name: Ansible test
   hosts: all
   tasks:
-  - name: launching AWS instance using Ansible
-    ec2:
-      key_name: aws_instance_Ansible
-      instance_type: t2.micro
-      image: ami-0abcb3d13703a4978
+  - name: create a VPC with dedicated tenancy and a couple of tags
+    ec2_vpc_net:
+      name: Module_dev2
+      cidr_block: 10.10.0.0/16
       region: us-east-2
-      wait: yes
-      group: Ansible
-      count: 1
-      vpc_subnet_id: default
-      assign_public_ip: yes
-      aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
-      aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+      tags:
+        module: ec2_vpc_net
+        this: works
+      tenancy: dedicated
+#      aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+#      aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+
+
+#  - name: launching AWS instance using Ansible
+#    ec2:
+#      key_name: aws_instance_Ansible
+#      instance_type: t2.micro
+#      image: ami-0abcb3d13703a4978
+#      region: us-east-2
+#      wait: yes
+#      group: Ansible
+#      count: 1
+#      vpc_subnet_id: default
+#      assign_public_ip: yes
+#      aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+#      aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
