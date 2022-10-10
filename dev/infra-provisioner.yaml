@@ -85,53 +85,7 @@
       name: pet_clinic_key
       region: us-east-2
       key_material: "{{ lookup('file', 'pet-clinic-dev.pub') }}"
-    
-  - name: criar vms para balanceamento
-    amazon.aws.ec2_instance:
-      key_name: pet_clinic_key
-      instance_type: t2.micro
-      image_id: ami-0abcb3d13703a4978
-      region: us-east-2
-      wait: yes
-      security_group: sec_group_petclinic
-      exact_count: 1
-      vpc_subnet_id: "{{ subnetdata.subnet.id }}"
-      tags:
-        Name: pet-clinic-lb-dev
-        role: balancer
-        env: dev
-
-
-  - name: criar vms para app
-    amazon.aws.ec2_instance:
-      key_name: pet_clinic_key
-      instance_type: t2.micro
-      image_id: ami-0abcb3d13703a4978
-      region: us-east-2
-      wait: yes
-      security_group: sec_group_petclinic
-      exact_count: 2
-      vpc_subnet_id: "{{ subnetdata.subnet.id }}"
-      tags:
-        Name: pet-clinic-app-dev
-        role: app
-        env: dev
-
-  - name: criar vms para db
-    amazon.aws.ec2_instance:
-      key_name: pet_clinic_key
-      instance_type: t2.micro
-      image_id: ami-0abcb3d13703a4978
-      region: us-east-2
-      wait: yes
-      security_group: sec_group_petclinic
-      exact_count: 1
-      vpc_subnet_id: "{{ subnetdata.subnet.id }}"
-      tags:
-        Name: pet-clinic-db-dev
-        role: database
-        env: dev
-
+   
 
 
   - name: aguarda criar vms para balanceamento
@@ -141,7 +95,7 @@
       image_id: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
-      state: started
+      state: running
       security_group: sec_group_petclinic
       exact_count: 1
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
@@ -158,7 +112,7 @@
       image_id: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
-      state: started
+      state: running
       security_group: sec_group_petclinic
       exact_count: 2
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
@@ -174,7 +128,7 @@
       image_id: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
-      state: started
+      state: running
       security_group: sec_group_petclinic
       exact_count: 1
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
