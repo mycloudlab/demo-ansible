@@ -56,7 +56,7 @@
   - name: launching AWS instance using Ansible
     ec2:
       key_name: pet_clinic_key
-      instance_type: t2.nano
+      instance_type: t2.micro
       image: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
