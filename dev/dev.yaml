@@ -84,7 +84,7 @@
     amazon.aws.ec2_instance:
       key_name: pet_clinic_key
       instance_type: t2.micro
-      image: ami-0abcb3d13703a4978
+      image_id: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
       group: sec_group_petclinic
