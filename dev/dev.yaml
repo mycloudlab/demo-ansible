@@ -4,7 +4,7 @@
   tasks:
   - name: debug
     debug:
-      var: hostvars[inventory_hostname]
+      var: env.AWS_ACCESS_KEY_ID
  # - name: launching AWS instance using Ansible
  #   ec2:
  #     key_name: aws_instance_Ansible
