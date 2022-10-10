@@ -48,9 +48,13 @@
           to_port: 443
           cidr_ip: 0.0.0.0/0
 
+  - name: create a new ec2 key pair, returns generated private key
+    amazon.aws.ec2_key:
+      name: pet_clinic_key
+    
   - name: launching AWS instance using Ansible
     ec2:
-      key_name: aws_instance_Ansible
+      key_name: pet_clinic_key
       instance_type: t2.micro
       image: ami-0abcb3d13703a4978
       region: us-east-2
