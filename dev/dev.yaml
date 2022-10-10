@@ -144,14 +144,20 @@
   - name: configura balanceamento
     shell: touch /tmp/lb
 
-#- name: ansible db
-#  hosts: tag_Name_pet_clinic_db_dev
-#  tasks:
-#  - name: configura db
-#    shell: touch /tmp/db
+- name: ansible db
+  hosts: tag_Name_pet_clinic_db_dev
+  remote_user: ec2-user
+  vars:
+    ansible_ssh_private_key_file: "{{playbook_dir}}/pet-clinic-dev"
+  tasks:
+  - name: configura db
+    shell: touch /tmp/db
 
-#- name: ansible app
-##  hosts: tag_Name_pet_clinic_app_dev
-#  tasks:
-#  - name: configura app
-#    shell: touch /tmp/app
+- name: ansible app
+  hosts: tag_Name_pet_clinic_app_dev
+  remote_user: ec2-user
+  vars:
+    ansible_ssh_private_key_file: "{{playbook_dir}}/pet-clinic-dev"
+  tasks:
+  - name: configura app
+    shell: touch /tmp/app
