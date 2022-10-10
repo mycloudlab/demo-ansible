@@ -20,22 +20,22 @@
       region: us-east-2
       cidr: 10.10.0.0/16
       tags:
-        name: subnet
         app: pet clinic
         env: dev
-#     register: database_subnet
+    register: subnetdata
 
+  - name: debug
+    debug:
+      var: subnetdata
 
-#  - name: launching AWS instance using Ansible
-#    ec2:
-#      key_name: aws_instance_Ansible
-#      instance_type: t2.micro
-#      image: ami-0abcb3d13703a4978
-#      region: us-east-2
-#      wait: yes
-#      group: Ansible
-#      count: 1
-#      vpc_subnet_id: default
-#      assign_public_ip: yes
-#      aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
-#      aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+  - name: launching AWS instance using Ansible
+    ec2:
+      key_name: aws_instance_Ansible
+      instance_type: t2.micro
+      image: ami-0abcb3d13703a4978
+      region: us-east-2
+      wait: yes
+      group: Ansible
+      count: 1
+      vpc_subnet_id: {{ subnetdata.subnet.id }}
+      assign_public_ip: yes
