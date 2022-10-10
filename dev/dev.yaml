@@ -33,7 +33,7 @@
       name: sec_group_petclinic
       description: an example EC2 group
       vpc_id: "{{vpcdata.vpc.id}}"
-      region: eu-west-2
+      region: us-east-2
       rules:
         - proto: tcp
           from_port: 80
