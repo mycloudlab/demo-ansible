@@ -15,6 +15,7 @@
 
   - name: cria a sub rede da aplicação
     amazon.aws.ec2_vpc_subnet:
+      name: subnet_petclinic_dev
       state: present
       vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
