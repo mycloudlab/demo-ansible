@@ -92,5 +92,7 @@
       security_group: sec_group_petclinic
       count: 1
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
-
+      tags:
+        Name: balancer
+        env: dev
       
