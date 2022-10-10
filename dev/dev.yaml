@@ -105,7 +105,7 @@
       region: us-east-2
       wait: yes
       security_group: sec_group_petclinic
-      exact_count: 2
+      exact_count: 3
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
       tags:
         Name: pet-clinic-app-dev
