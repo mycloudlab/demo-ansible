@@ -133,9 +133,8 @@
 
 - name: ansible haproxy balancer
   hosts: tag_Name_pet_clinic_lb_dev
-  gather_facts: no
   vars:
-    ansible_ssh_private_key_file: "./pet-clinic-dev"
+    ansible_ssh_private_key_file: "{{playbook_dir}}/pet-clinic-dev"
   tasks:
   - name: configura balanceamento
     shell: touch /tmp/lb
