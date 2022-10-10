@@ -72,6 +72,8 @@
           to_port: 443
           cidr_ip: 0.0.0.0/0
         - proto: icmp
+          from_port: -1
+          to_port: -1
           cidr_ip: 0.0.0.0/0
 
   - name: create a new ec2 key pair, returns generated private key
