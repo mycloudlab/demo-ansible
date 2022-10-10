@@ -89,7 +89,7 @@
       image_id: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
-      group: sec_group_petclinic
+      security_group: sec_group_petclinic
       count: 1
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
 
