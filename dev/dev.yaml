@@ -14,7 +14,7 @@
 
 
   - name: cria o gateway de internet para aplicação pet-clinic
-    community.aws.ec2_vpc_igw:
+    ec2_vpc_igw:
       vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
       state: present
@@ -26,7 +26,7 @@
 
 
   - name: cria a sub rede para aplicação pet-clinic
-    amazon.aws.ec2_vpc_subnet:
+    ec2_vpc_subnet:
       state: present
       vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
@@ -53,7 +53,7 @@
     register: prtdata
 
   - name: ec2 security group
-    amazon.aws.ec2_group:
+    ec2_group:
       name: sec_group_petclinic
       description: an example EC2 group
       vpc_id: "{{vpcdata.vpc.id}}"
@@ -73,7 +73,7 @@
           cidr_ip: 0.0.0.0/0
 
   - name: create a new ec2 key pair, returns generated private key
-    amazon.aws.ec2_key:
+    ec2_key:
       name: pet_clinic_key
       region: us-east-2
       key_material: "{{ lookup('file', 'pet-clinic-dev.pub') }}"
