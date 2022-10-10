@@ -4,4 +4,4 @@
   tasks:
   - name: debug
     debug:
-      msg: {{env}}
+      msg: "{{env}}"
