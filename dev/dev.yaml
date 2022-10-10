@@ -11,11 +11,12 @@
         app: pet clinic
         env: dev
       tenancy: dedicated
+      register: vpcdata
 
   - name: cria a sub rede da aplicação
     amazon.aws.ec2_vpc_subnet:
       state: present
-      vpc_id: vpc-petclinic
+      vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
       cidr: 10.10.0.0/16
       tags:
