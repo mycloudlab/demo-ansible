@@ -37,5 +37,5 @@
       wait: yes
       group: Ansible
       count: 1
-      vpc_subnet_id: {{ subnetdata.subnet.id }}
+      vpc_subnet_id: "{{ subnetdata.subnet.id }}"
       assign_public_ip: yes
