@@ -66,10 +66,12 @@
         - proto: tcp
           from_port: 22
           to_port: 22
-          cidr_ip: 0.0.0.0/8
+          cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 443
           to_port: 443
+          cidr_ip: 0.0.0.0/0
+        - proto: icmp
           cidr_ip: 0.0.0.0/0
 
   - name: create a new ec2 key pair, returns generated private key
