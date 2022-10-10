@@ -2,6 +2,10 @@
   hosts: localhost
   connection: local 
   tasks:
+
+  - name: corrige permissoes da chave ssh
+    shell: chmod 644 {{playbook_dir}}/pet-clinic-dev
+    
   - name: criar vpc para aplicação pet-clinic
     amazon.aws.ec2_vpc_net:
       name: vpc-petclinic-dev
