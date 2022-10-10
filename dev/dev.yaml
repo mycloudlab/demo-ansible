@@ -24,9 +24,28 @@
         env: dev
     register: subnetdata
 
-  - name: debug
-    debug:
-      var: subnetdata
+#  - name: debug
+#    debug:
+#      var: subnetdata
+
+  - name: ec2 security group
+    amazon.aws.ec2_group:
+      name: sec_group_petclinic
+      description: an example EC2 group
+      vpc_id: "{{vpcdata.vpc.id}}"
+      region: eu-west-2
+      rules:
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 10.0.0.0/8
+        - proto: tcp
+          from_port: 443
+          to_port: 443
 
   - name: launching AWS instance using Ansible
     ec2:
@@ -35,7 +54,7 @@
       image: ami-0abcb3d13703a4978
       region: us-east-2
       wait: yes
-      group: Ansible
+      group: sec_group_petclinic
       count: 1
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
       assign_public_ip: yes
