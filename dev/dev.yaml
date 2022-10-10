@@ -13,5 +13,5 @@
       count: 1
       vpc_subnet_id: default
       assign_public_ip: yes
-      aws_access_key: {{ lookup('env', 'AWS_ACCESS_KEY_ID') }}
-      Aws_secret_key: {{ lookup('env', 'AWS_SECRET_KEY_ID') }}
+      aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+      Aws_secret_key: "{{ lookup('env', 'AWS_SECRET_KEY_ID') }}"
