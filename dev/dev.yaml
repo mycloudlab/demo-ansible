@@ -134,7 +134,7 @@
 - name: ansible haproxy balancer
   hosts: tag_Name_pet_clinic_lb_dev
   vars:
-    ansible_ssh_private_key_file: pet-clinic-dev
+    ansible_ssh_private_key_file: "{{ lookup('file', 'pet-clinic-dev') }}"
   tasks:
   - name: configura balanceamento
     shell: touch /tmp/lb
@@ -142,7 +142,7 @@
 - name: ansible db
   hosts: tag_Name_pet_clinic_db_dev
   vars:
-    ansible_ssh_private_key_file: pet-clinic-dev
+    ansible_ssh_private_key_file: "{{ lookup('file', 'pet-clinic-dev') }}"
   tasks:
   - name: configura db
     shell: touch /tmp/db
@@ -150,7 +150,7 @@
 - name: ansible app
   hosts: tag_Name_pet_clinic_app_dev
   vars:
-    ansible_ssh_private_key_file: pet-clinic-dev
+    ansible_ssh_private_key_file: "{{ lookup('file', 'pet-clinic-dev') }}"
   tasks:
   - name: configura app
     shell: touch /tmp/app
