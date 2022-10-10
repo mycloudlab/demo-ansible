@@ -2,14 +2,26 @@
 - name: Ansible test
   hosts: all
   tasks:
-  - name: create a VPC with dedicated tenancy and a couple of tags
+  - name: criar vpc para aplicação pet-clinic
     ec2_vpc_net:
       name: vpc_petclinic_dev
       cidr_block: 10.10.0.0/16
       region: us-east-2
       tags:
-        app: petclinic
+        app: pet clinic
+        env: dev
       tenancy: dedicated
+
+  - name: cria a sub rede da aplicação
+    amazon.aws.ec2_vpc_subnet:
+      state: present
+      vpc_id: vpc-petclinic
+      cidr: 10.10.0.0/16
+      tags:
+        app: pet clinic
+        env: dev
+#     register: database_subnet
+
 
 #  - name: launching AWS instance using Ansible
 #    ec2:
