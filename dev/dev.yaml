@@ -50,6 +50,7 @@
   - name: create a new ec2 key pair, returns generated private key
     amazon.aws.ec2_key:
       name: pet_clinic_key
+      region: us-east-2
     
   - name: launching AWS instance using Ansible
     ec2:
