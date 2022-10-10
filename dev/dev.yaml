@@ -4,28 +4,53 @@
   tasks:
   - name: criar vpc para aplicação pet-clinic
     ec2_vpc_net:
-      name: vpc_petclinic_dev
+      name: vpc-petclinic-dev
       cidr_block: 10.10.0.0/16
       region: us-east-2
       tags:
-        app: pet clinic
+        Name: vpc-petclinic-dev
         env: dev
     register: vpcdata
 
-  - name: cria a sub rede da aplicação
+
+  - name: cria o gateway de internet para aplicação pet-clinic
+    ec2_vpc_igw:
+      vpc_id: "{{vpcdata.vpc.id}}"
+      region: us-east-2
+      state: present
+      tags:
+        Name: igw-pet-clinic-dev
+        env: dev
+    register: igwdata
+
+
+
+  - name: cria a sub rede para aplicação pet-clinic
     amazon.aws.ec2_vpc_subnet:
       state: present
       vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
       cidr: 10.10.0.0/16
+      map_public: yes
       tags:
-        app: pet clinic
+        Name: subnet-pet-clinic-dev
         env: dev
     register: subnetdata
 
-#  - name: debug
-#    debug:
-#      var: subnetdata
+
+  - name: cria vpc public subnet route table
+    ec2_vpc_route_table:
+      vpc_id: "{{ vpcdata.vpc.id }}"
+      region: us-east-2
+      state: present
+      tags:
+        Name: rtb-petclinic-dev
+      subnets: [ "{{ subnetdata.subnet.id }}" ]
+      # create routes
+      routes:
+        - dest: "0.0.0.0/0"
+          gateway_id: "{{ igwdata.gateway_id }}"
+    register: prtdata
 
   - name: ec2 security group
     amazon.aws.ec2_group:
@@ -41,7 +66,7 @@
         - proto: tcp
           from_port: 22
           to_port: 22
-          cidr_ip: 10.0.0.0/8
+          cidr_ip: 0.0.0.0/8
         - proto: tcp
           from_port: 443
           to_port: 443
