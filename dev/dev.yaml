@@ -14,7 +14,7 @@
 
 
   - name: cria o gateway de internet para aplicação pet-clinic
-    ec2_vpc_igw:
+    community.aws.ec2_vpc_igw:
       vpc_id: "{{vpcdata.vpc.id}}"
       region: us-east-2
       state: present
