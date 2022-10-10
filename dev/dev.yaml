@@ -16,6 +16,7 @@
     amazon.aws.ec2_vpc_subnet:
       state: present
       vpc_id: vpc-petclinic
+      region: us-east-2
       cidr: 10.10.0.0/16
       tags:
         app: pet clinic
