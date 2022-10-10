@@ -10,7 +10,6 @@
       tags:
         app: pet clinic
         env: dev
-      tenancy: dedicated
     register: vpcdata
 
   - name: cria a sub rede da aplicação
@@ -63,4 +62,4 @@
       count: 1
       vpc_subnet_id: "{{ subnetdata.subnet.id }}"
       assign_public_ip: yes
-      tenancy: dedicated
+      
