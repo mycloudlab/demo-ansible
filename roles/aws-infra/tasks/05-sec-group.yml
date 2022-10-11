@@ -2,6 +2,7 @@
 - name: ec2 security group
   amazon.aws.ec2_group:
     name: sec_group_petclinic_{{env}}
+    description: sec group para app petclinic {{env}}
     vpc_id: "{{vpcdata.vpc.id}}"
     rules:
       - proto: tcp
