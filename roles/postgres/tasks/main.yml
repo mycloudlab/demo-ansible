@@ -27,6 +27,15 @@
     insertbefore: EOF
   notify: restart postgresql
 
+  - name: reseta senha do postgres
+    become: yes
+    become_method: sudo
+    become_user: postgres
+    postgresql_user: 
+      db: postgres
+      name: postgres
+      password: "postgres"
+
 - name: systemctl postgresql enabled
   service:
     name: postgresql
