@@ -1,6 +1,0 @@
-- name: deploy app
-  hosts: all
-  tasks:
-    - name: deploy
-      debug:
-        msg: "Hello World deploy!"

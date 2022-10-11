@@ -1,6 +1,0 @@
-- name: deploy app
-  hosts: all
-  tasks:
-    - name: meta
-      debug:
-        msg: "Hello World meta!"
