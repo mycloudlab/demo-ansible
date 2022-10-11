@@ -24,6 +24,7 @@
       listen_addresses='*'
       port = 5432
     insertbefore: EOF
+    
 - name: systemctl postgresql enabled
   service:
     name: postgresql
