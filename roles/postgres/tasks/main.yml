@@ -6,9 +6,14 @@
     state: present
   notify: restart postgresql
 
+- name: inicializa o banco
+  shell: /usr/bin/postgresql-setup --initdb
+  ignore_errors: True
+
 - name: systemctl postgresql enabled
   service:
     name: postgresql
     state: started
     enabled: yes
   notify: restart postgresql
+
