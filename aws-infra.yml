@@ -1,0 +1,6 @@
+---
+- name: pet-clinic infra provisioner
+  hosts: localhost
+  connection: local 
+  roles: 
+    - aws-infra

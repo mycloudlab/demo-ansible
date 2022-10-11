@@ -1,0 +1,13 @@
+---
+- name: cria vpc public subnet route table
+  amazon.aws.ec2_vpc_route_table:
+    vpc_id: "{{ vpcdata.vpc.id }}"
+    state: present
+    tags:
+      Name: rtb-petclinic-{{env}}
+    subnets: [ "{{ subnetdata.subnet.id }}" ]
+    # create routes
+    routes:
+      - dest: "0.0.0.0/0"
+        gateway_id: "{{ igwdata.gateway_id }}"
+  register: prtdata

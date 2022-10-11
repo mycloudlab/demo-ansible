@@ -1,0 +1,3 @@
+---
+- name: configura app
+  shell: touch /tmp/app

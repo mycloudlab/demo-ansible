@@ -1,0 +1,8 @@
+---
+- include: 01-vpc.yml
+- include: 02-igw.yml
+- include: 03-subnet.yml
+- include: 04-route-table.yml
+- include: 05-sec-group.yml
+- include: 06-ssh-keys.yml
+- include: 07-ec2.yml

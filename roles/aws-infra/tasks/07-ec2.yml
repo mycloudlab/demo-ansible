@@ -1,0 +1,46 @@
+
+- name: aguarda criar vms para balanceamento
+  amazon.aws.ec2_instance:
+    key_name: pet_clinic_key_{{env}}
+    instance_type: t2.micro
+    image_id: ami-0abcb3d13703a4978
+    wait: yes
+    state: running
+    security_group: sec_group_petclinic_{{env}}
+    exact_count: 1
+    vpc_subnet_id: "{{ subnetdata.subnet.id }}"
+    tags:
+      Name: pet-clinic-lb-{{env}}
+      role: balancer
+      env: {{env}}
+
+
+- name: aguarda criar vms para app
+  amazon.aws.ec2_instance:
+    key_name: pet_clinic_key_{{env}}
+    instance_type: t2.micro
+    image_id: ami-0abcb3d13703a4978
+    wait: yes
+    state: running
+    security_group: sec_group_petclinic_{{env}}
+    exact_count: 2
+    vpc_subnet_id: "{{ subnetdata.subnet.id }}"
+    tags:
+      Name: pet-clinic-app-{{env}}
+      role: app
+      env: {{env}}
+
+- name: aguarda criar vms para db
+  amazon.aws.ec2_instance:
+    key_name: pet_clinic_key_{{env}}
+    instance_type: t2.micro
+    image_id: ami-0abcb3d13703a4978
+    wait: yes
+    state: running
+    security_group: sec_group_petclinic_{{env}}
+    exact_count: 1
+    vpc_subnet_id: "{{ subnetdata.subnet.id }}"
+    tags:
+      Name: pet-clinic-db-{{env}}
+      role: database
+      env: {{env}}

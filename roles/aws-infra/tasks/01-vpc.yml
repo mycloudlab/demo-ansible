@@ -1,0 +1,8 @@
+- name: criar vpc para aplicação pet-clinic
+  amazon.aws.ec2_vpc_net:
+    name: vpc-petclinic-{{env}}
+    cidr_block: 10.10.0.0/16
+    tags:
+      Name: vpc-petclinic-{{env}}
+      env: {{env}}
+  register: vpcdata

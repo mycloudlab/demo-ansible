@@ -1,0 +1,11 @@
+---
+- name: cria a sub rede para aplicação pet-clinic
+  amazon.aws.ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{vpcdata.vpc.id}}"
+    cidr: 10.10.0.0/16
+    map_public: yes
+    tags:
+      Name: subnet-pet-clinic-{{env}}
+      env: {{env}}
+  register: subnetdata
