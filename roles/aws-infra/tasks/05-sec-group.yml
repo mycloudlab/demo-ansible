@@ -2,9 +2,7 @@
 - name: ec2 security group
   amazon.aws.ec2_group:
     name: sec_group_petclinic_{{env}}
-    description: an example EC2 group
     vpc_id: "{{vpcdata.vpc.id}}"
-    region: us-east-2
     rules:
       - proto: tcp
         from_port: 80

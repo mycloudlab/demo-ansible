@@ -4,5 +4,5 @@
     cidr_block: 10.10.0.0/16
     tags:
       Name: vpc-petclinic-{{env}}
-      env: {{env}}
+      env: "{{env}}"
   register: vpcdata

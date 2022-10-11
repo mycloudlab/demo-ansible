@@ -12,7 +12,7 @@
     tags:
       Name: pet-clinic-lb-{{env}}
       role: balancer
-      env: {{env}}
+      env: "{{env}}"
 
 
 - name: aguarda criar vms para app
@@ -28,7 +28,7 @@
     tags:
       Name: pet-clinic-app-{{env}}
       role: app
-      env: {{env}}
+      env: "{{env}}"
 
 - name: aguarda criar vms para db
   amazon.aws.ec2_instance:
@@ -43,4 +43,4 @@
     tags:
       Name: pet-clinic-db-{{env}}
       role: database
-      env: {{env}}
+      env: "{{env}}"
