@@ -16,6 +16,7 @@
     path: /var/lib/pgsql/data/pg_hba.conf
     line: 'host all all 0.0.0.0/0 trust'
     insertbefore: EOF
+  notify: restart postgresql
 
 - name: configura postgresql.conf
   lineinfile:
@@ -24,7 +25,8 @@
       listen_addresses='*'
       port = 5432
     insertbefore: EOF
-    
+  notify: restart postgresql
+
 - name: systemctl postgresql enabled
   service:
     name: postgresql
