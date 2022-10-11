@@ -3,6 +3,7 @@
   amazon.aws.ec2_vpc_route_table:
     vpc_id: "{{ vpcdata.vpc.id }}"
     state: present
+    region: "{{AWS_REGION}}"
     tags:
       Name: rtb-petclinic-{{env}}
     subnets: [ "{{ subnetdata.subnet.id }}" ]
