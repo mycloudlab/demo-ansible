@@ -1,3 +1,9 @@
 ---
 - name: configura postgres
   shell: touch /tmp/db
+
+- name: instala postgres
+  yum:
+    name:
+      - postgres
+    state: present
