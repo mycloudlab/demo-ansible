@@ -4,6 +4,7 @@
     name: sec_group_petclinic_{{env}}
     description: sec group para app petclinic {{env}}
     vpc_id: "{{vpcdata.vpc.id}}"
+    region: "{{AWS_REGION}}"
     rules:
       - proto: tcp
         from_port: 80
