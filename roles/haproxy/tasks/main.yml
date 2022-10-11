@@ -6,6 +6,10 @@
     state: present
   notify: restart haproxy
 
+- name: debug
+  debug:
+    var: groups
+    
 - name: configura haproxy
   template:
     src: haproxy.cfg.j2
