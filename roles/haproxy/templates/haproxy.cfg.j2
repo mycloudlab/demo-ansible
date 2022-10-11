@@ -38,6 +38,6 @@ frontend main
 backend app
     balance     roundrobin
     cookie SERVER insert indirect nocache
-{% for host in groups['tag_Name_pet_clinic_app_{{env}}'] %}
+{% for host in groups['tag_Name_pet_clinic_app_'+env] %}
     server  app{{loop.index}} {{ hostvars[host]['ansible_host'] }}:8080 check
 {% endfor %}
