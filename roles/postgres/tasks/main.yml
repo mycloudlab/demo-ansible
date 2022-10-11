@@ -8,7 +8,7 @@
   notify: restart postgresql
 
 - name: inicializa o banco
-  shell: /usr/bin/postgresql-setup --initdb > /dev/null
+  shell: /usr/bin/postgresql-setup --initdb 2>&1 /dev/null
   ignore_errors: True
 
 
