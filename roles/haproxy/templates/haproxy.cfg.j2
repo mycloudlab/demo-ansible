@@ -31,6 +31,13 @@ defaults
     timeout check           10s
     maxconn                 3000
 
+frontend stats
+    bind *:5000
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+    stats auth admin:stats
+
 frontend main
     bind *:80
     default_backend             app
