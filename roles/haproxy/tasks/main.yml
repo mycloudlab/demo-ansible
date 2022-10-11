@@ -6,11 +6,11 @@
     state: present
   notify: restart haproxy
 
-#- name: configura haproxy
-#  template:
-#    src: haproxy.cfg.j2
-#    dest: /etc/haproxy/haproxy.cfg
-#  notify: restart haproxy
+- name: configura haproxy
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: restart haproxy
 
 - name: systemctl haproxy enabled
   service:
