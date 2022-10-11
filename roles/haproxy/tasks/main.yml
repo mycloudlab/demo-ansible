@@ -1,3 +1,13 @@
 ---
-- name: configura balanceamento
-  shell: touch /tmp/lb
+- name: instala haproxy
+  yum:
+    name:
+      - haproxy
+    state: present
+  notify: restart haproxy
+
+#- name: configura haproxy
+#  template:
+#    src: haproxy.cfg.j2
+#    dest: /etc/haproxy/haproxy.cfg
+#  notify: restart haproxy
