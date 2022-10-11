@@ -24,14 +24,20 @@
     insertbefore: EOF
   notify: restart postgresql
 
-- name: configura postgresql.conf
+- name: configura listener postgresql.conf
   lineinfile:
     path: /var/lib/pgsql/data/postgresql.conf
-    line: |
-      listen_addresses='*'
-      port = 5432
+    line: "listen_addresses='*'"
     insertbefore: EOF
   notify: restart postgresql
+
+- name: configura porta postgresql.conf
+  lineinfile:
+    path: /var/lib/pgsql/data/postgresql.conf
+    line: "port = 5432"
+    insertbefore: EOF
+  notify: restart postgresql
+
 
 - name: cria o banco do petclinic
   become: true
