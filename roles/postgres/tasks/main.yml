@@ -28,7 +28,15 @@
     insertbefore: EOF
   notify: restart postgresql
 
-- name: reseta senha do postgres
+- name: Create the database specified in vars
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_db: 
+    name: petclinic
+    template: template0
+    state: present
+
+- name: reseta senha do postgresql para o banco petclinic
   become: yes
   become_method: sudo
   become_user: postgres
