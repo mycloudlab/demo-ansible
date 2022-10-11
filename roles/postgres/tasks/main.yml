@@ -10,6 +10,20 @@
   shell: /usr/bin/postgresql-setup --initdb
   ignore_errors: True
 
+
+- name: configura hba.conf
+  lineinfile:
+    path: /var/lib/pgsql/data/pg_hba.conf
+    line: 'host all all 0.0.0.0/0 trust'
+    insertbefore: EOF
+
+- name: configura postgresql.conf
+  lineinfile:
+    path: /var/lib/pgsql/data/postgresql.conf
+    line: |
+      listen_addresses='*'
+      port = 5432
+    insertbefore: EOF
 - name: systemctl postgresql enabled
   service:
     name: postgresql
