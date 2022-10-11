@@ -1,9 +1,14 @@
 ---
-- name: configura postgres
-  shell: touch /tmp/db
-
 - name: instala postgres
   yum:
     name:
-      - postgres
+      - postgresql-server
     state: present
+  notify: restart postgresql
+
+- name: systemctl postgresql enabled
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  notify: restart postgresql

@@ -6,10 +6,6 @@
     state: present
   notify: restart haproxy
 
-- name: debug
-  debug:
-    var: groups
-    
 - name: configura haproxy
   template:
     src: haproxy.cfg.j2
@@ -21,4 +17,4 @@
     name: haproxy
     state: started
     enabled: yes
-
+  notify: restart haproxy
