@@ -12,7 +12,7 @@
 #    dest: /etc/haproxy/haproxy.cfg
 #  notify: restart haproxy
 
----
+
 - name: systemctl haproxy enabled
   service:
     name: haproxy
