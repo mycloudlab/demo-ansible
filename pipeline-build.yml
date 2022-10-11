@@ -1,0 +1,7 @@
+---
+- name: pet-clinic build
+  hosts: localhost
+  connection: local 
+  tasks:
+    - name: build
+      shell: java -version 
