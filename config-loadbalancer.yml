@@ -7,7 +7,7 @@
 
 - name: haproxy balancer para aplicação pet-clinic
   remote_user: ec2-user
-  became: yes
+  become: yes
   hosts: tag_Name_pet_clinic_lb_{{env}}
   vars:
     ansible_ssh_private_key_file: "{{playbook_dir}}/{{env}}/pet-clinic"
