@@ -3,11 +3,12 @@
   yum:
     name:
       - postgresql-server
+      - psycopg2
     state: present
   notify: restart postgresql
 
 - name: inicializa o banco
-  shell: /usr/bin/postgresql-setup --initdb
+  shell: /usr/bin/postgresql-setup --initdb > /dev/null
   ignore_errors: True
 
 
