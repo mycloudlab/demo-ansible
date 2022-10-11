@@ -2,5 +2,6 @@
 - name: cria chaves de acesso a instancias ec2
   amazon.aws.ec2_key:
     name: pet_clinic_key_{{env}}
+    region: "{{AWS_REGION}}"
     key_material: "{{ lookup('file', '{{playbook_dir}}/{{env}}/pet-clinic.pub') }}"
   
