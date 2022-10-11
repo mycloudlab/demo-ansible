@@ -7,9 +7,14 @@
     state: present
   notify: restart postgresql
 
+- name: verifica se o banco foi iniciado
+  stat:
+    path: /var/lib/pgsql/data
+  register: db_init
+
 - name: inicializa o banco
-  shell: /usr/bin/postgresql-setup --initdb 2>&1 /dev/null
-  ignore_errors: True
+  shell: /usr/bin/postgresql-setup --initdb
+  when: not db_init.stat.exists
 
 
 - name: configura hba.conf
@@ -28,7 +33,7 @@
     insertbefore: EOF
   notify: restart postgresql
 
-- name: Create the database specified in vars
+- name: cria o banco do petclinic
   become: true
   become_user: postgres
   community.postgresql.postgresql_db: 
