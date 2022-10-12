@@ -5,7 +5,7 @@
   tasks:
     - name: show before fact 
       debug:  
-        msg: "{{ hostvars['localhost']['one_fact'] }}"
+        msg: "{{ hostvars['localhost']['one_fact'] | default(omit)  }}"
     
     - name: define fact 
       set_fact:
