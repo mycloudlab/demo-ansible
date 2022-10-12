@@ -4,18 +4,14 @@
   connection: local 
   tasks:
     - name: show before fact 
-      debug: 
-        msg: disparadso {{ ansible_facts.one_fact| default(omit) }}
-    
-    - name: show before fact 
       debug:  
-        msg: disparado {{ one_fact | default(omit) }}
+        msg: "{{ hostvars['localhost']['one_fact'] }}" }}
     
     - name: define fact 
       set_fact:
-        ansible_facts.one_fact: something
+        one_fact: something
         cacheable: yes
 
     - name: webhook 
       debug: 
-        msg: disparado2 disparado {{ nsible_facts.one_fact | default(omit) }}
+        msg: disparado2 disparado {{ one_fact  }}
