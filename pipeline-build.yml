@@ -3,8 +3,23 @@
   hosts: localhost
   connection: local 
   tasks:
-    - name: build
-      shell: cat /home/runner/.sdkman/candidates/maven/current/conf/settings.xml
+    - name: Clone do projeto
+      ansible.builtin.git:
+        repo: https://github.com/mycloudlab/pet-clinic-demo-aap
+        dest: /src
 
-    - name: build java
-      shell: java -version
+    - name: compile
+      shell: mvn clean package -DskipTests
+        args:
+          chdir: /src
+      async: 1000
+      poll: 0
+      register: mvn_build
+
+    - name: aguarda compilação
+      ansible.builtin.async_status:
+        jid: '{{ mvn_build.ansible_job_id }}'
+      register: job_result
+      until: job_result.finished
+      retries: 100
+      delay: 1
