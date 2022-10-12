@@ -9,7 +9,7 @@
 
 - name: verifica se o banco foi iniciado
   stat:
-    path: /var/lib/pgsql/data
+    path: /var/lib/pgsql/data/pg_hba.conf
   register: db_init
 
 - name: inicializa o banco
