@@ -6,12 +6,12 @@
     - name: Clone do projeto
       git:
         repo: https://github.com/mycloudlab/pet-clinic-demo-aap
-        dest: /src
+        dest: src
 
     - name: compile
       shell: mvn clean package -DskipTests
       args:
-        chdir: /src
+        chdir: src
       async: 1000
       poll: 0
       register: mvn_build
