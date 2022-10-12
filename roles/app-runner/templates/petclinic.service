@@ -1,0 +1,19 @@
+[Unit]
+Description=pet clinic
+After=syslog.target network.target
+
+[Service]
+SuccessExitStatus=143
+
+User=petclinic
+Group=petclinic
+
+Type=simple
+
+Environment="JAVA_HOME=/home/root/.sdkman/candidates/java/current"
+WorkingDirectory=/opt
+ExecStart=${JAVA_HOME}/bin/java -jar petclinic.jar
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

@@ -10,18 +10,12 @@
         single_branch: yes
         version: main
 
-    - name: compile
-      shell: mvn clean package -DskipTests
+    - name: muda a versão para o commit hash 
+      shell: mvn versions:set -DnewVersion=$(git log -1 --format="%H")
       args:
         chdir: src
-#      async: 1000
-#     poll: 0
-#      register: mvn_build
 
-#    - name: aguarda compilação
-#      ansible.builtin.async_status:
-#        jid: '{{ mvn_build.ansible_job_id }}'
-#      register: job_result
-#      until: job_result.finished
-#      retries: 100
-#      delay: 1
+    - name: compile
+      shell: mvn clean package deploy -DskipTests
+      args:
+        chdir: src

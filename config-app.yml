@@ -11,4 +11,5 @@
   vars:
     ansible_ssh_private_key_file: "{{playbook_dir}}/{{env}}/pet-clinic"
   roles: 
+    - common-server
     - app-runner

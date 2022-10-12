@@ -1,3 +1,28 @@
 ---
-- name: configura app
-  shell: touch /tmp/app
+- name: adiciona usuário da aplicação
+  user:
+    name: petclinic
+    state: present
+
+- name: adiciona grupo da aplicação
+  group:
+    name: petclinic
+    state: present
+
+
+
+- name: download app version
+  get_url:
+    url: http://nexus3-nexus.apps.cluster-2vplz.2vplz.sandbox789.opentlc.com/repository/maven-releases/org/springframework/samples/spring-petclinic/{{APP_VERSION}}/spring-petclinic-{{APP_VERSION}}.jar
+    dest: /opt/pet-clinic.jar
+
+- name: adiciona como serviço
+  template:
+    src: petclinic.service
+    dest: /etc/systemd/system/petclinic.service
+
+- name: systemctl petclinic enabled
+  service:
+    name: petclinic
+    state: started
+    enabled: yes
