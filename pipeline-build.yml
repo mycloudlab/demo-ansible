@@ -5,3 +5,6 @@
   tasks:
     - name: build
       shell: cat /home/runner/.sdkman/candidates/maven/current/conf/settings.xml
+
+    - name: build java
+      shell: java -version
