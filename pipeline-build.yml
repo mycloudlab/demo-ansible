@@ -4,14 +4,14 @@
   connection: local 
   tasks:
     - name: Clone do projeto
-      ansible.builtin.git:
+      git:
         repo: https://github.com/mycloudlab/pet-clinic-demo-aap
         dest: /src
 
     - name: compile
       shell: mvn clean package -DskipTests
-        args:
-          chdir: /src
+      args:
+        chdir: /src
       async: 1000
       poll: 0
       register: mvn_build
