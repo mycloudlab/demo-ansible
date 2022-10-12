@@ -7,7 +7,7 @@
       debug: 
         msg: disparado {{ one_fact | default(omit) }}
     
-    - name: define fact
+    - name: define fact 
       set_fact:
         one_fact: something
 
