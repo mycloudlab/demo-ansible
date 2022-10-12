@@ -8,14 +8,14 @@
         msg: disparadso {{ ansible_facts.one_fact| default(omit) }}
     
     - name: show before fact 
-      debug: 
+      debug:  
         msg: disparado {{ one_fact | default(omit) }}
     
     - name: define fact 
       set_fact:
-        one_fact: something
+        ansible_facts.one_fact: something
         cacheable: yes
 
     - name: webhook 
       debug: 
-        msg: disparado2 disparado {{ one_fact | default(omit) }}
+        msg: disparado2 disparado {{ nsible_facts.one_fact | default(omit) }}
