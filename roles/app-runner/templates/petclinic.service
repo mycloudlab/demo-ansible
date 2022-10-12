@@ -12,7 +12,7 @@ Type=simple
 
 Environment=""
 WorkingDirectory=/app
-ExecStart=/usr/local/sdkman/candidates/java/current/bin/java -jar petclinic.jar
+ExecStart=/usr/local/sdkman/candidates/java/current/bin/java -jar pet-clinic.jar
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]
