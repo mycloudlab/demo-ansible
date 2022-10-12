@@ -1,5 +1,5 @@
 ---
-- name: pet-clinic build
+- name: pet-clinic webhook
   hosts: localhost
   connection: local 
   tasks:
