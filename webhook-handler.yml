@@ -10,6 +10,7 @@
     - name: define fact 
       set_fact:
         one_fact: something
+        cacheable: yes
 
     - name: webhook 
       debug: 
