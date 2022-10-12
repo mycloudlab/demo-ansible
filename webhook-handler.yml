@@ -1,0 +1,9 @@
+---
+- name: pet-clinic build
+  hosts: localhost
+  connection: local 
+  tasks:
+    
+    - name: webhook 
+      debug: 
+        msg: disparado
