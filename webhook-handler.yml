@@ -5,6 +5,10 @@
   tasks:
     - name: show before fact 
       debug: 
+        msg: disparadso {{ ansible_facts.one_fact| default(omit) }}
+    
+    - name: show before fact 
+      debug: 
         msg: disparado {{ one_fact | default(omit) }}
     
     - name: define fact 
