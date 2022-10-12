@@ -16,9 +16,6 @@
   shell: /usr/bin/postgresql-setup --initdb
   when: not db_init.stat.exists
 
-- name: inicializa o banco
-  shell: "false"
-
 - name: configura hba.conf
   lineinfile:
     path: /var/lib/pgsql/data/pg_hba.conf

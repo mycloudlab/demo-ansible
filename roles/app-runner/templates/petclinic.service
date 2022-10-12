@@ -12,7 +12,7 @@ Type=simple
 
 Environment=""
 WorkingDirectory=/app
-ExecStart=/usr/local/sdkman/candidates/java/current/bin/java -jar pet-clinic.jar
+ExecStart=/usr/local/sdkman/candidates/java/current/bin/java -Dspring.profiles.active=postgres -DPOSTGRES_URL=jdbc:postgresql://{{groups['tag_Name_pet_clinic_db_'+ env][0]}}:5432/petclinic -DPOSTGRES_USER=petclinic-user -DPOSTGRES_PASS=petclinic-passwd -jar pet-clinic.jar
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]
