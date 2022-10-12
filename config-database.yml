@@ -5,7 +5,7 @@
     - name: corrige permissões da chave ssh
       shell: chmod 400 {{playbook_dir}}/{{env}}/pet-clinic
 
-- name: postgresql para aplicação pet-clinic
+- name: postgresql 
   remote_user: ec2-user
   hosts: tag_Name_pet_clinic_db_{{env}}
   become: yes
@@ -14,3 +14,12 @@
   roles: 
     - common-server
     - postgres
+
+- name: configurações de banco para aplicação pet-clinic
+  remote_user: ec2-user
+  hosts: tag_Name_pet_clinic_db_{{env}}
+  become: yes
+  vars:
+    ansible_ssh_private_key_file: "{{playbook_dir}}/{{env}}/pet-clinic"
+  roles: 
+    - postgres-config-petclinic
