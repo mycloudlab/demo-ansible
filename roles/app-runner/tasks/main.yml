@@ -13,7 +13,7 @@
 
 - name: download app version
   get_url:
-    url: http://nexus3-nexus.apps.cluster-2vplz.2vplz.sandbox789.opentlc.com/repository/maven-releases/org/springframework/samples/spring-petclinic/{{APP_VERSION}}/spring-petclinic-{{APP_VERSION}}.jar
+    url: http://admin:admin123@nexus3-nexus.apps.cluster-2vplz.2vplz.sandbox789.opentlc.com/repository/maven-releases/org/springframework/samples/spring-petclinic/{{APP_VERSION}}/spring-petclinic-{{APP_VERSION}}.jar
     dest: /opt/pet-clinic.jar
 
 - name: adiciona como serviço
