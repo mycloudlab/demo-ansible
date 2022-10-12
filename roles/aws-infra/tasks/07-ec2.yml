@@ -3,7 +3,7 @@
   amazon.aws.ec2_instance:
     key_name: pet_clinic_key_{{env}}
     instance_type: t2.micro
-    image_id: ami-0abcb3d13703a4978
+    image_id: ami-066dd9f5267fde586
     wait: yes
     state: running
     region: "{{AWS_REGION}}"
@@ -20,7 +20,7 @@
   amazon.aws.ec2_instance:
     key_name: pet_clinic_key_{{env}}
     instance_type: t2.micro
-    image_id: ami-0abcb3d13703a4978
+    image_id: ami-066dd9f5267fde586
     wait: yes
     state: running
     region: "{{AWS_REGION}}"
@@ -36,7 +36,7 @@
   amazon.aws.ec2_instance:
     key_name: pet_clinic_key_{{env}}
     instance_type: t2.micro
-    image_id: ami-0abcb3d13703a4978
+    image_id: ami-066dd9f5267fde586
     wait: yes
     state: running
     region: "{{AWS_REGION}}"
