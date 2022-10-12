@@ -31,7 +31,8 @@
     dest: /etc/systemd/system/petclinic.service
 
 - name: systemctl petclinic enabled
-  service:
+  systemd:
     name: petclinic
-    state: started
+    state: restarted
+    daemon_reload: yes
     enabled: yes
