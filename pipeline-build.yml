@@ -4,4 +4,4 @@
   connection: local 
   tasks:
     - name: build
-      shell: java -version 
+      shell: cat /home/runner/.sdkman/candidates/maven/current/conf/settings.xml
