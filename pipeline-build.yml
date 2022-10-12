@@ -10,7 +10,7 @@
 
     - name: compile
       shell: mvn clean package -DskipTests
-      strip_empty_ends: false
+        strip_empty_ends: false
       args:
         chdir: src
 #      async: 1000
