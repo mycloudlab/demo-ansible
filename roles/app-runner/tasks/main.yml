@@ -9,12 +9,21 @@
     name: petclinic
     state: present
 
-
+- name: cria diretorio da app
+  file: 
+    path: /app 
+    state: directory 
+    mode: 0755 
+    owner: petclinic 
+    group: petclinic
 
 - name: download app version
   get_url:
     url: http://admin:admin123@nexus3-nexus.apps.cluster-2vplz.2vplz.sandbox789.opentlc.com/repository/maven-releases/org/springframework/samples/spring-petclinic/{{APP_VERSION}}/spring-petclinic-{{APP_VERSION}}.jar
     dest: /opt/pet-clinic.jar
+    owner: petclinic 
+    group: petclinic
+
 
 - name: adiciona como serviço
   template:

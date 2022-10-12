@@ -10,9 +10,9 @@ Group=petclinic
 
 Type=simple
 
-Environment="JAVA_HOME=/home/root/.sdkman/candidates/java/current"
-WorkingDirectory=/opt
-ExecStart=${JAVA_HOME}/bin/java -jar petclinic.jar
+Environment=""
+WorkingDirectory=/app
+ExecStart=/usr/local/sdkman/candidates/java/current/bin/java -jar petclinic.jar
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]
