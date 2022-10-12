@@ -14,4 +14,4 @@
 
     - name: webhook 
       debug: 
-        msg: disparado
+        msg: disparado2 disparado {{ one_fact | default(omit) }}
