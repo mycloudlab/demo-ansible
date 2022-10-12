@@ -3,7 +3,14 @@
   hosts: localhost
   connection: local 
   tasks:
+    - name: show before fact 
+      debug: 
+        msg: disparado {{ one_fact | default(omit) }}
     
+    - name: define fact
+      set_fact:
+        one_fact: something
+
     - name: webhook 
       debug: 
         msg: disparado
