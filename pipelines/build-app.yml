@@ -56,7 +56,7 @@
 
 
     - name: user id
-      shell: uid
+      shell: id
 
 
     - name: user id
