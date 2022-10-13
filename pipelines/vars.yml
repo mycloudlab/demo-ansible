@@ -37,3 +37,32 @@ git_petclinic_infra_key: !vault |
           30633234373836646139616136656132383164626330663636636436663064376638383739373336
           30356462333234333933636263343433633961333763363566356565343665353037643632346235
           32393033626163626636356639313738643764333336616366303139633738353230
+
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo
+  namespace: ansible-automation-platform
+spec:
+  serviceAccountName: default
+  automountServiceAccountToken: false
+  containers:
+    - image: quay.io/rhn_support_csantana/ansible-executation-environment-java8-mvn-3:2.0
+      name: worker
+      args:
+        - sleep
+        - "10000"
+      resources:
+        requests:
+          cpu: 250m
+          memory: 100Mi
+      volumeMounts:
+      - name: maven-storage
+        mountPath: /maven/repository
+  volumes:
+  - name: maven-storage
+    persistentVolumeClaim:
+      claimName: ee-maven-repos

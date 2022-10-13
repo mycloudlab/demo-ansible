@@ -32,21 +32,22 @@
       file:
         path: /home/runner/.ssh
         state: directory
+        mode: 0400
 
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_key }}"
-        dest: /home/runner/.ssh/id_rsa
+        dest: /home/runner/.ssh/id_ed25519
         mode: 0400
 
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_pub }}"
-        dest: /home/runner/.ssh/id_rsa.pub
+        dest: /home/runner/.ssh/id_ed25519.pub
         mode: 0400
 
     - name: Clone do projeto de infraestrutura
-      shell: env
+      shell: env |grep ssh
 
 
     - name: Clone do projeto de infraestrutura
