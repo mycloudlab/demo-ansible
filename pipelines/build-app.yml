@@ -46,7 +46,7 @@
         mode: 0400
 
     - name: Clone do projeto de infraestrutura
-      shell: cat /home/runner/.ssh/*
+      shell: env
 
 
     - name: Clone do projeto de infraestrutura
