@@ -55,6 +55,13 @@
 
 
 
+    - name: user id
+      shell: uid
+
+
+    - name: user id
+      shell: ls -la /home/runner/.ssh
+
     - name: Clone do projeto de infraestrutura
       shell: GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone git@github.com:mycloudlab/demo-ansible.git infra
     
