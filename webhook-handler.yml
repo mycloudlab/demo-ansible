@@ -8,8 +8,11 @@
     - prod/config.yml
   tasks:
     - name: Launch a job
-      ansible.controller.job_launch:
-        job_template: "sync-petclinic-dev"
+      ansible.controller.workflow_launch:
+        workflow_template: "sync-petclinic-dev"
+        extra_vars:
+          var1: My First Variable
+          var2: My Second Variable
 
     - name: show before fact 
       debug:  
