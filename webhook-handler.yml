@@ -15,7 +15,7 @@
           var1: My First Variable
           var2: My Second Variable
         wait: False
-      when: dev_version != hostvars['localhost']['petclinic_dev_version'] 
+      when: hostvars['localhost']['petclinic_dev_version'] is defined and dev_version != hostvars['localhost']['petclinic_dev_version'] 
 
     - name: Define as versões de aplicação
       set_fact:
