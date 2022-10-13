@@ -14,9 +14,29 @@
         extra_vars:
           env: dev
           AWS_REGION: us-east-2
-          APP_VERSION: a42d47830849bf4db97186a0b23abae009ee00c2
+          APP_VERSION: "{{ dev_version }}"
         wait: False
       when: hostvars['localhost']['petclinic_dev_version'] is defined and dev_version != hostvars['localhost']['petclinic_dev_version'] 
+
+    - name: Executa sync em homologação
+      ansible.controller.workflow_launch:
+        workflow_template: "sync-petclinic-hom"
+        extra_vars:
+          env: hom
+          AWS_REGION: us-east-2
+          APP_VERSION: "{{ hom_version }}"
+        wait: False
+      when: hostvars['localhost']['petclinic_hom_version'] is defined and hom_version != hostvars['localhost']['petclinic_hom_version'] 
+
+    - name: Executa sync em produção
+      ansible.controller.workflow_launch:
+        workflow_template: "sync-petclinic-prod"
+        extra_vars:
+          env: prod
+          AWS_REGION: us-east-2
+          APP_VERSION: "{{ prod_version }}"
+        wait: False
+      when: hostvars['localhost']['petclinic_prod_version'] is defined and prod_version != hostvars['localhost']['petclinic_prod_version'] 
 
     - name: Define as versões de aplicação
       set_fact:
