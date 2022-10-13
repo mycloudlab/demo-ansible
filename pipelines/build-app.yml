@@ -36,24 +36,21 @@
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_key }}"
-        dest: /home/runner/.ssh/id_rsa
+        dest: /home/runner/.ssh/id_ed25519
         mode: 0600
 
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_pub }}"
-        dest: /home/runner/.ssh/id_rsa.pub
+        dest: /home/runner/.ssh/id_ed25519.pub
         mode: 0600
 
 
-    - name: commit new version
-      shell: ls /home/runner/ -la
-
     - name: Clone do projeto de infraestrutura
-      git:
-        repo: git@github.com:mycloudlab/demo-ansible.git
-        dest: infra
-        version: main
+      shell: GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone git@github.com:mycloudlab/demo-ansible.git infra
+    
+   # podman run --rm -v ${HOME}/.ssh/id_ed25519.pub:/home/runner/.ssh/id_ed25519.pub -v ${HOME}/.ssh/id_ed25519:/home/runner/.ssh/id_ed25519 -it teste bash
+
     
     - name: seta a versão nova em desenvolvimento
       copy:
