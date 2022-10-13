@@ -2,10 +2,13 @@
 - name: pet-clinic build
   hosts: localhost
   connection: local 
+  vars_files:
+    - vars.yml
+
   tasks:
     - name: recuperar conteudo chave
       debug:
-        msg: "{{ ansible_env }}"
+        msg: "{{ git_petclinic_infra_key }}"
 
     - name: para
       shell: "false"
