@@ -32,7 +32,7 @@
       copy:
         content: "{{ git_petclinic_infra_key }}"
         dest: infra_key
-        mode: 0600
+        mode: 0400
 
     - name: Clone do projeto de infraestrutura
       git:
