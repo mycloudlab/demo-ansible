@@ -5,7 +5,7 @@
   tasks:
     - name: recuperar conteudo chave
       debug:
-        var: git_petclinic_infra_key
+        msg: "{{ ansible_env }}"
 
     - name: para
       shell: "false"
