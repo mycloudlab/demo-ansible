@@ -12,8 +12,9 @@
       ansible.controller.workflow_launch:
         workflow_template: "sync-petclinic-dev"
         extra_vars:
-          var1: My First Variable
-          var2: My Second Variable
+          env: dev
+          AWS_REGION: us-east-2
+          APP_VERSION: a42d47830849bf4db97186a0b23abae009ee00c2
         wait: False
       when: hostvars['localhost']['petclinic_dev_version'] is defined and dev_version != hostvars['localhost']['petclinic_dev_version'] 
 
