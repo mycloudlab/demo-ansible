@@ -37,16 +37,14 @@
       copy:
         content: "{{ git_petclinic_infra_key }}"
         dest: /home/runner/.ssh/id_ed25519
-        mode: 600
 
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_pub }}"
         dest: /home/runner/.ssh/id_ed25519.pub
-        mode: 600
 
     - name: user id
-      shell: id
+      shell: chmod 600 /home/runner/.ssh -R
 
     
 
