@@ -9,9 +9,9 @@
     
     - name: define fact 
       set_fact:
-        app_version: 1.45     
+        app_version: 1.46   
         cacheable: yes
-
+ 
     - name: webhook 
       debug: 
         msg: disparado2 disparado {{ app_version  }}
