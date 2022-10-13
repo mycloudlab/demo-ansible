@@ -36,7 +36,7 @@
 
 
     - name: commit new version
-      shell: cat infra_key
+      shell: env
 
     - name: Clone do projeto de infraestrutura
       git:
