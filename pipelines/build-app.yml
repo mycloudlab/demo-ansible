@@ -33,7 +33,6 @@
         path: /home/runner/.ssh
         state: directory
 
-
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_key }}"
@@ -49,9 +48,16 @@
     - name: user id
       shell: id
 
-
     - name: user id
       shell: ls -la /home/runner/.ssh
+
+
+    - name: chave publica
+      shell: cat /home/runner/.ssh/id_ed25519.pub
+
+
+    - name: chave 
+      shell: cat /home/runner/.ssh/id_ed25519
 
     - name: Clone do projeto de infraestrutura
       shell: GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone git@github.com:mycloudlab/demo-ansible.git infra
