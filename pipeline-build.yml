@@ -9,7 +9,7 @@
         dest: src
         single_branch: yes
         version: main
-
+ 
     - name: muda a versão para o commit hash 
       shell: mvn versions:set -DnewVersion=$(git log -1 --format="%H")
       args:
