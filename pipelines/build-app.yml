@@ -3,6 +3,13 @@
   hosts: localhost
   connection: local 
   tasks:
+    - name: recuperar conteudo chave
+      debug:
+        var: git_petclinic_infra_key
+
+    - name: para
+      shell: false
+     
     - name: Clone do projeto
       git:
         repo: https://github.com/mycloudlab/pet-clinic-demo-aap
@@ -11,7 +18,7 @@
         version: main
  
     - name: muda a versão para o commit hash 
-      shell: mvn versions:set -DnewVersion=$(git log -1 --format="%H")
+      shell: mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$(git rev-parse --short HEAD)
       args:
         chdir: src
 
@@ -19,3 +26,13 @@
       shell: mvn clean package deploy -DskipTests
       args:
         chdir: src
+
+
+
+#    - name: Clone do projeto de infraestrutura
+#      git:
+#        repo: git@github.com:mycloudlab/demo-ansible.git
+#        dest: infra
+#        single_branch: yes
+#        version: main
+#        key_file: 
