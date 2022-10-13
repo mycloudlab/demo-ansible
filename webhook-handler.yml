@@ -2,7 +2,15 @@
 - name: pet-clinic webhook
   hosts: localhost
   connection: local 
+   vars_files:
+    - dev/config.yml
+    - hom/config.yml
+    - prod/config.yml
   tasks:
+
+    - name: awx call
+      shell: awx
+
     - name: show before fact 
       debug:  
         msg: "{{ hostvars['localhost']['app_version'] | default(omit)  }}"
