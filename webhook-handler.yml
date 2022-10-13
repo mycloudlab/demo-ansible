@@ -7,21 +7,19 @@
     - hom/config.yml
     - prod/config.yml
   tasks:
-    - name: Launch a job
+
+    - name: Executa sync em desenvolvimento
       ansible.controller.workflow_launch:
         workflow_template: "sync-petclinic-dev"
+        extra_vars:
+          var1: My First Variable
+          var2: My Second Variable
         wait: False
-        
+      when: dev_version != hostvars['localhost']['petclinic_dev_version'] 
 
-    - name: show before fact 
-      debug:  
-        msg: "{{ hostvars['localhost']['app_version'] | default(omit)  }}"
-    
-    - name: define fact 
+    - name: Define as versões de aplicação
       set_fact:
-        app_version: 1.46   
+        petclinic_dev_version: "{{ dev_version }}"
+        petclinic_hom_version: "{{ hom_version }}"
+        petclinic_prod_version: "{{ prod_version }}"
         cacheable: yes
- 
-    - name: webhook 
-      debug: 
-        msg: disparado2 disparado {{ app_version  }}
