@@ -50,8 +50,8 @@
       shell: ls -la /home/runner/.ssh
 
 
-    - name: user id
-      shell: chmod 600 /home/runner/.ssh/ -R
+#    - name: user id
+#      shell: chmod 600 /home/runner/.ssh/ -R
 
     
 
