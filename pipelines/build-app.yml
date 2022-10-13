@@ -34,6 +34,10 @@
         dest: infra_key
         mode: 0400
 
+
+    - name: commit new version
+      shell: cat infra_key
+
     - name: Clone do projeto de infraestrutura
       git:
         repo: git@github.com:mycloudlab/demo-ansible.git
