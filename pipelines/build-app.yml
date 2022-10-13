@@ -53,8 +53,6 @@
         state: directory
         mode: 0400
 
-    - name: Clone do projeto de infraestrutura
-      shell: env |grep ssh
 
 
     - name: Clone do projeto de infraestrutura
