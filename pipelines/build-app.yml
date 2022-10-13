@@ -28,6 +28,11 @@
       args:
         chdir: src
 
+    - name: Creates directory
+      file:
+        path: /home/runner/.ssh
+        state: directory
+
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_key }}"
