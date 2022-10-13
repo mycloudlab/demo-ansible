@@ -36,7 +36,7 @@
 
 
     - name: commit new version
-      shell: env
+      shell: env && pwd
 
     - name: Clone do projeto de infraestrutura
       git:
