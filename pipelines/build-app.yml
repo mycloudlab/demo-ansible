@@ -44,7 +44,7 @@
         dest: infra
         version: main
         accept_hostkey: yes
-        key_file: $(pwd)/infra_key
+        key_file: infra_key
 #      shell: git config --add  core.sshCommand 'ssh -i $(pwd)/infra_key' && git clone git@github.com:mycloudlab/demo-ansible.git infra
     
     - name: seta a versão nova em desenvolvimento
