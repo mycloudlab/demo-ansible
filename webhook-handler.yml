@@ -10,9 +10,7 @@
     - name: Launch a job
       ansible.controller.workflow_launch:
         workflow_template: "sync-petclinic-dev"
-        extra_vars:
-          var1: My First Variable
-          var2: My Second Variable
+        
 
     - name: show before fact 
       debug:  
