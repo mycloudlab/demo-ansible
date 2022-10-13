@@ -31,7 +31,13 @@
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_key }}"
-        dest: infra_key
+        dest: /home/runner/.ssh/id_rsa
+        mode: 0600
+
+    - name: Ensure GitHub deploy key is present on the server.
+      copy:
+        content: "{{ git_petclinic_infra_pub }}"
+        dest: /home/runner/.ssh/id_rsa.pub
         mode: 0600
 
 
@@ -43,9 +49,6 @@
         repo: git@github.com:mycloudlab/demo-ansible.git
         dest: infra
         version: main
-        accept_hostkey: yes
-        key_file: infra_key
-#      shell: git config --add  core.sshCommand 'ssh -i $(pwd)/infra_key' && git clone git@github.com:mycloudlab/demo-ansible.git infra
     
     - name: seta a versão nova em desenvolvimento
       copy:
@@ -53,4 +56,4 @@
         dest: infra/configs/dev/config.yml
 
     - name: commit new version
-      shell: GIT_SSH_COMMAND='ssh -o "StrictHostKeyChecking=no" -i $(pwd)/infra_key' && cd infra && git add . && git commit -a -m "update dev version" && git push
+      shell: cd infra && git add . && git commit -a -m "update dev version" && git push
