@@ -7,9 +7,9 @@
     - hom/config.yml
     - prod/config.yml
   tasks:
-
-    - name: awx call
-      shell: awx
+    - name: Launch a job
+      job_launch:
+        job_template: "sync-petclinic-dev"
 
     - name: show before fact 
       debug:  
