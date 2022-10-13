@@ -15,7 +15,7 @@
         version: main
  
     - name: obtem a versão da aplicação
-      shell: git rev-parse --short HEAD
+      shell: cd src && git rev-parse --short HEAD
       register: version
 
     - name: muda a versão para o commit hash 
