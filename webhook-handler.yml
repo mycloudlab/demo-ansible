@@ -10,6 +10,7 @@
     - name: Launch a job
       ansible.controller.workflow_launch:
         workflow_template: "sync-petclinic-dev"
+        wait: False
         
 
     - name: show before fact 
