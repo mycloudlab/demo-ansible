@@ -8,7 +8,7 @@
         var: git_petclinic_infra_key
 
     - name: para
-      shell: false
+      shell: "false"
      
     - name: Clone do projeto
       git:
