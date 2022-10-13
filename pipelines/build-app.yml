@@ -34,41 +34,41 @@
 #        state: directory
 
     - name: Creates directory
-      shell: mkdir /home/runner/.ssh
+      shell: mkdir .ssh
 
     - name: Ensure GitHub deploy key is present on the server.
       copy:
-        content: "{{ git_petclinic_infra_key }}\r"
-        dest: /home/runner/.ssh/id_ed25519
+        content: "{{ git_petclinic_infra_key }}"
+        dest: .ssh/id_ed25519
 
     - name: Ensure GitHub deploy key is present on the server.
       copy:
-        content: "{{ git_petclinic_infra_pub }}\r"
-        dest: /home/runner/.ssh/id_ed25519.pub
+        content: "{{ git_petclinic_infra_pub }}"
+        dest: .ssh/id_ed25519.pub
 
     - name: user id
       shell: ls -la /home/runner/.ssh
 
 
     - name: set permission
-      shell: cd /home/runner/.ssh && chmod 600 * -R
+      shell: cd .ssh && chmod 600 * -R
 
     
 
     - name: chave publica
-      shell: cat /home/runner/.ssh/id_ed25519.pub
+      shell: cat .ssh/id_ed25519.pub
 
 
     - name: chave 
-      shell: cat /home/runner/.ssh/id_ed25519
+      shell: cat .ssh/id_ed25519
 
     
     
     - name: adicinona
-      shell: echo -e "github.com,20.201.28.151 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=" > /home/runner/.ssh/known_hosts
+      shell: echo -e "github.com,20.201.28.151 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=" > .ssh/known_hosts
 
     - name: Clone do projeto de infraestrutura
-      shell: git clone git@github.com:mycloudlab/demo-ansible.git infra
+      shell: HOME=$PWD git clone git@github.com:mycloudlab/demo-ansible.git infra
     
    # podman run --rm -v ${HOME}/.ssh/id_ed25519.pub:/home/runner/.ssh/id_ed25519.pub -v ${HOME}/.ssh/id_ed25519:/home/runner/.ssh/id_ed25519 -it teste bash
 
