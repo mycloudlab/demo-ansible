@@ -35,11 +35,7 @@
         mode: 0600
 
     - name: Clone do projeto de infraestrutura
-      git:
-        repo: git@github.com:mycloudlab/demo-ansible.git
-        dest: infra
-        version: main
-        key_file: infra_key
+      shell: GIT_SSH_COMMAND='ssh -i $(pwd)/infra_key' && git clone git@github.com:mycloudlab/demo-ansible.git infra
     
     - name: seta a versão nova em desenvolvimento
       copy:
