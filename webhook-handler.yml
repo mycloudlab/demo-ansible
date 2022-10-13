@@ -5,13 +5,13 @@
   tasks:
     - name: show before fact 
       debug:  
-        msg: "{{ hostvars['localhost']['one_fact'] | default(omit)  }}"
+        msg: "{{ hostvars['localhost']['app_version'] | default(omit)  }}"
     
     - name: define fact 
       set_fact:
-        one_fact: something
+        app_version: 1.45     
         cacheable: yes
 
     - name: webhook 
       debug: 
-        msg: disparado2 disparado {{ one_fact  }}
+        msg: disparado2 disparado {{ app_version  }}
