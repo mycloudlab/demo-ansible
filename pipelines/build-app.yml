@@ -6,12 +6,6 @@
     - vars.yml
 
   tasks:
-    - name: recuperar conteudo chave
-      debug:
-        msg: "{{ git_petclinic_infra_key }}"
-
-    - name: para
-      shell: "false"
      
     - name: Clone do projeto
       git:
@@ -20,8 +14,12 @@
         single_branch: yes
         version: main
  
+    - name: obtem a versão da aplicação
+      shell: git rev-parse --short HEAD
+      register: version
+
     - name: muda a versão para o commit hash 
-      shell: mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$(git rev-parse --short HEAD)
+      shell: mvn versions:set -DgenerateBackupPoms=false -DnewVersion={{version.stdout}}
       args:
         chdir: src
 
@@ -30,12 +28,23 @@
       args:
         chdir: src
 
+    - name: Ensure GitHub deploy key is present on the server.
+      copy:
+        content: "{{ git_petclinic_infra_key }}"
+        dest: infra_key
+        mode: 0600
 
+    - name: Clone do projeto de infraestrutura
+      git:
+        repo: git@github.com:mycloudlab/demo-ansible.git
+        dest: infra
+        version: main
+        key_file: infra_key
+    
+    - name: seta a versão nova em desenvolvimento
+      copy:
+        content: "dev_version: {{ version.stdout }}"
+        dest: infra/configs/dev/config.yml
 
-#    - name: Clone do projeto de infraestrutura
-#      git:
-#        repo: git@github.com:mycloudlab/demo-ansible.git
-#        dest: infra
-#        single_branch: yes
-#        version: main
-#        key_file: 
+    - name: commit new version
+      shell: GIT_SSH_COMMAND='ssh -i $(pwd)/infra_key' && cd infra && git add . && git commit -a -m "update dev version" && git push
