@@ -51,7 +51,7 @@
 
 
     - name: configura permissão
-      shell: chmod 600 /home/runner/.ssh/ -R
+      shell: cd /home/runner/.ssh/ && chmod 600 * -R
 
     
 
