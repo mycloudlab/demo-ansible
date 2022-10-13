@@ -8,7 +8,7 @@
     - prod/config.yml
   tasks:
     - name: Launch a job
-      awx.awx.job_launch:
+      ansible.controller.job_launch:
         job_template: "sync-petclinic-dev"
 
     - name: show before fact 

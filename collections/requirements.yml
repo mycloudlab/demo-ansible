@@ -1,4 +1,4 @@
 ---
 collections:
 - community.postgresql
-- awx.awx
+- redhat_cop.controller_configuration
