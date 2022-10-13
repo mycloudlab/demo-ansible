@@ -2,7 +2,6 @@
 - name: pet-clinic build
   hosts: localhost
   connection: local 
-  become: yes
   vars_files:
     - vars.yml
 
@@ -39,22 +38,13 @@
       copy:
         content: "{{ git_petclinic_infra_key }}"
         dest: /home/runner/.ssh/id_ed25519
-        mode: 0400
+        mode: 0600
 
     - name: Ensure GitHub deploy key is present on the server.
       copy:
         content: "{{ git_petclinic_infra_pub }}"
         dest: /home/runner/.ssh/id_ed25519.pub
-        mode: 0400
-
-
-    - name: Creates directory
-      file:
-        path: /home/runner/.ssh
-        state: directory
-        mode: 0400
-
-
+        mode: 0600
 
     - name: user id
       shell: id
